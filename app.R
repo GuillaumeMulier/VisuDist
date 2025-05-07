@@ -13,7 +13,7 @@ library(bslib)
 # Define UI for application that draws a histogram
 ui <- page_navbar( 
   nav_panel("Get started", "Page A content"), 
-  nav_panel("Une distribution", "Page B content"), 
+  nav_panel("Une distribution", UniqueDist("DistUnique")), 
   nav_panel("Différence de 2 distributions", "Page C content"), 
   title = "Lois de probabilités", 
   id = "page", 
@@ -44,6 +44,8 @@ ui <- page_navbar(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
 
+  DistUniqueServer("DistUnique")
+  
     # output$distPlot <- renderPlot({
     #     # generate bins based on input$bins from ui.R
     #     x    <- faithful[, 2]
