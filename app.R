@@ -1,61 +1,31 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
+# Main script to run the application                     #
+# Autor : G. Mulier                                      #
+# Created the 07/05/2025, modifid the 02/07/2025         #
 
 library(shiny)
 library(bslib)
+library(ggplot2)
 
-# Define UI for application that draws a histogram
 ui <- page_navbar( 
+  header = tags$head(
+    tags$style(HTML("
+    .shiny-output-error-validation {
+      color: red;
+      font-weight: bold;
+    }
+  "))
+  ),
   nav_panel("Get started", "Page A content"), 
-  nav_panel("Une distribution", UniqueDist("DistUnique")), 
-  nav_panel("Différence de 2 distributions", "Page C content"), 
-  title = "Lois de probabilités", 
+  nav_panel("One distribution", UniqueDist("DistUnique")), 
+  nav_panel("Difference between 2 distributions", "Page C content"), 
+  title = "Get probabilities from distribution", 
   id = "page", 
 ) 
 
-# ui <- fluidPage(
-# 
-#     # Application title
-#     titlePanel("Old Faithful Geyser Data"),
-# 
-#     # Sidebar with a slider input for number of bins 
-#     sidebarLayout(
-#         sidebarPanel(
-#             sliderInput("bins",
-#                         "Number of bins:",
-#                         min = 1,
-#                         max = 50,
-#                         value = 30)
-#         ),
-# 
-#         # Show a plot of the generated distribution
-#         mainPanel(
-#            plotOutput("distPlot")
-#         )
-#     )
-# )
-
-# Define server logic required to draw a histogram
 server <- function(input, output) {
 
   DistUniqueServer("DistUnique")
   
-    # output$distPlot <- renderPlot({
-    #     # generate bins based on input$bins from ui.R
-    #     x    <- faithful[, 2]
-    #     bins <- seq(min(x), max(x), length.out = input$bins + 1)
-    # 
-    #     # draw the histogram with the specified number of bins
-    #     hist(x, breaks = bins, col = 'darkgray', border = 'white',
-    #          xlab = 'Waiting time to next eruption (in mins)',
-    #          main = 'Histogram of waiting times')
-    # })
 }
 
 # Run the application 

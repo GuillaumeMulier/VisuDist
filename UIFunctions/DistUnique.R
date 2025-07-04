@@ -1,31 +1,46 @@
-# Script pour les UI de visualisation d'une distribution #
-# Auteur : G. Mulier                                     #
-# Créé le 07/05/2025, modifié le 01/07/2025              #
+# Script for UI in the part 1 distribution               #
+# Autor : G. Mulier                                      #
+# Created the 07/05/2025, modified the 02/07/2025        #
 
-# UI 
 UniqueDist <- function(id) {
   
   ns <- NS(id)
   
   sidebarLayout(
-    # Zone de gauche de sélection des paramètres des différentes lois
+    # Left zone for parameters
     sidebarPanel(
-      selectInput(ns("ChoixDist1"),
-                  "Choose a distribution",
-                  names(ListeDistribution)),
+      h4("Choose a distribution"),
+      selectInput(ns("ChoixDist1"), NULL, names(ListeDistribution)),
       h4("Parameters of the distribution"),
       uiOutput(ns("ParamsDist")),
-      h4("Paramètres graphiques"),
+      h4("Graphical parameters"),
       numericInput(ns("MinDens1"), label = "Minimum of graphical window", value = -5),
       numericInput(ns("MaxDens1"), label = "Maximum of graphical window", value = 5),
+      h4("Desired probabilities"),
+      p(tags$i("You can enter multiple probability queries separated by a space. For each query, use > or < followed by the threshold to get, for example, Pr(X < threshold).")),
+      textInput(ns("InputThresh1"), label = NULL),
       h4("Time to get the results"),
       actionButton(ns("PlotBut1"), "Compute results")
     ),
-    # Zone centrale où il y aura le graphique, les résultats et le code
+    # Center = plot, code and results
     mainPanel(
-      h4("Densité en x = 1 :"),
-      verbatimTextOutput(ns("densite")),
-      plotOutput(ns("GrapheDensite"))
+      tabsetPanel(
+        id = ns("TypePlot"),
+        tabPanel("base R",
+                 h4("Plot of the distribution"),
+                 p(tags$i("If multiple thresholds are supplied, the plot is drawn for the first one.")),
+                 plotOutput(ns("GrapheDensiteBaseR")),
+                 h4("Code to reproduce the plot"),
+                 verbatimTextOutput(ns("CodeDensiteBaseR"))),
+        tabPanel("ggplot2",
+                 h4("Plot of the distribution"),
+                 plotOutput(ns("GrapheDensiteGgplot")),
+                 h4("Code to reproduce the plot"),
+                 verbatimTextOutput(ns("CodeDensiteGgplot")))
+      ),
+      h4("Results on the asked probabilities"),
+      tableOutput(ns("TableRes1")),
+      verbatimTextOutput(ns("CodeRes1"))
     )
   )
   
