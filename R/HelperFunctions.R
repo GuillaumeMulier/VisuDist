@@ -1,6 +1,6 @@
 # Script for helper functions                            #
 # Autor : G. Mulier                                      #
-# Created the 02/07/2025, modified the 02/07/2025        #
+# Created the 02/07/2025, modified the 03/07/2025        #
 
 
 # Check the validity of the supplied thresholds

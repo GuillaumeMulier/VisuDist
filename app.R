@@ -1,6 +1,6 @@
 # Main script to run the application                     #
 # Autor : G. Mulier                                      #
-# Created the 07/05/2025, modifid the 02/07/2025         #
+# Created the 07/05/2025, modifid the 03/07/2025         #
 
 library(shiny)
 library(bslib)

@@ -1,6 +1,6 @@
 # Script pour le server de visualisation d'une distribution #
 # Auteur : G. Mulier                                        #
-# Créé le 07/05/2025, modifié le 02/07/2025                 #
+# Créé le 07/05/2025, modifié le 03/07/2025                 #
 
 DistUniqueServer <- function(id) {
   moduleServer(
@@ -59,8 +59,10 @@ DistUniqueServer <- function(id) {
         Prefixe <- DonneesDens[[1]]
         Declaration <- DonneesDens[[2]]
         FctDens <- DonneesDens[[3]]
+        Parametres <- ItemDist()[["params"]]
+        ValeursParametres <- setNames(lapply(names(Parametres), \(param) input[[paste0(ChosenDist(), "_", param)]]), names(Parametres))
         TxtDonnees <- paste(paste0("Donnees <- data.frame(x = seq(", input$MinDens1, ", ", input$MaxDens1, ", length.out = 1000))"),
-                            paste0("Donnees$Density <- ", FctDens, "(Donnees$x, ", paste(names(ItemDist()[["params"]]), " = ", vapply(ItemDist()[["params"]], \(x) x$value, numeric(1)), collapse = ", ", sep = ""), ")"),
+                            paste0("Donnees$Density <- ", FctDens, "(Donnees$x, ", paste(names(ValeursParametres), " = ", ValeursParametres, collapse = ", ", sep = ""), ")"),
                             sep = "\n")
         if (!is.null(Declaration)) TxtDonnees <- paste0(Declaration, "\n", TxtDonnees)
         if (!is.null(Prefixe)) TxtDonnees <- paste0(Prefixe, "\n", TxtDonnees)
@@ -75,7 +77,7 @@ DistUniqueServer <- function(id) {
                                  paste0("DonneesSurf <- data.frame(x = c(seq(", input$MaxDens1, ", ", Threshold, ", length.out = 1000)", ", ", Threshold, ", ", input$MaxDens1, "))"))
           }
           TxtDonnees <- paste0(TxtDonnees, "\nDonneesSurf$Density <- 0\n", 
-                               paste0("DonneesSurf$Density[1:1000] <- ", FctDens, "(DonneesSurf$x[1:1000], ", paste(names(ItemDist()[["params"]]), " = ", vapply(ItemDist()[["params"]], \(x) x$value, numeric(1)), collapse = ", ", sep = ""), ")"))
+                               paste0("DonneesSurf$Density[1:1000] <- ", FctDens, "(DonneesSurf$x[1:1000], ", paste(names(ValeursParametres), " = ", ValeursParametres, collapse = ", ", sep = ""), ")"))
         }
         return(TxtDonnees)
       })
@@ -150,12 +152,14 @@ DistUniqueServer <- function(id) {
         Prefixe <- DonneesCDF[[1]]
         Declaration <- DonneesCDF[[2]]
         FctCDF <- DonneesCDF[[3]]
+        Parametres <- ItemDist()[["params"]]
+        ValeursParametres <- setNames(lapply(names(Parametres), \(param) input[[paste0(ChosenDist(), "_", param)]]), names(Parametres))
         TxtCDF <- paste(
           "threshold <- ...",
           "# To get the result of Pr(X < threshold)",
-          paste0(FctCDF, "(threshold, ", paste(names(ItemDist()[["params"]]), " = ", vapply(ItemDist()[["params"]], \(x) x$value, numeric(1)), collapse = ", ", sep = ""), ")"),
+          paste0(FctCDF, "(threshold, ", paste(names(ValeursParametres), " = ", ValeursParametres, collapse = ", ", sep = ""), ")"),
           "# And to get the result of Pr(X > threshold)",
-          paste0("1 - ", FctCDF, "(threshold, ", paste(names(ItemDist()[["params"]]), " = ", vapply(ItemDist()[["params"]], \(x) x$value, numeric(1)), collapse = ", ", sep = ""), ")"),
+          paste0("1 - ", FctCDF, "(threshold, ", paste(names(ValeursParametres), " = ", ValeursParametres, collapse = ", ", sep = ""), ")"),
           sep = "\n"
         )
         if (!is.null(Declaration)) TxtCDF <- paste0(Declaration, "\n", TxtCDF)

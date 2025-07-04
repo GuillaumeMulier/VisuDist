@@ -38,6 +38,7 @@ UniqueDist <- function(id) {
                  h4("Code to reproduce the plot"),
                  verbatimTextOutput(ns("CodeDensiteGgplot")))
       ),
+      br(), br(),
       h4("Results on the asked probabilities"),
       tableOutput(ns("TableRes1")),
       verbatimTextOutput(ns("CodeRes1"))
