@@ -9,7 +9,8 @@ ListeDistribution <- list(
     "cdf" = pnorm,
     "name_cdf" = "pnorm",
     "params" = list("mean" = list("value" = 0, "label" = "Mean of normal distribution", "min" = NA, "max" = NA),
-                    "sd" = list("value" = 1, "label" = "Standard deviation of normal distribution", "min" = 1e-6, "max" = NA))
+                    "sd" = list("value" = 1, "label" = "Standard deviation of normal distribution", "min" = 1e-6, "max" = NA)),
+    "range_plot" = c(-5, 5)
   ),
   "Beta" = list(
     "dens" = dbeta,
@@ -17,14 +18,16 @@ ListeDistribution <- list(
     "cdf" = pbeta,
     "name_cdf" = "pbeta",
     "params" = list("shape1" = list("value" = 1, "label" = "&alpha; of beta distribution", "min" = 1e-6, "max" = NA),
-                    "shape2" = list("value" = 1, "label" = "&beta; of beta distribution", "min" = 1e-6, "max" = NA))
+                    "shape2" = list("value" = 1, "label" = "&beta; of beta distribution", "min" = 1e-6, "max" = NA)),
+    "range_plot" = c(0, 1)
   ),
   "Exponential" = list(
     "dens" = dexp,
     "name_dens" = "dexp",
     "cdf" = pexp,
     "name_cdf" = "pexp",
-    "params" = list("rate" = list("value" = 1, "label" = "Rate of exponential distribution", "min" = 1e-6, "max" = NA))
+    "params" = list("rate" = list("value" = 1, "label" = "Rate of exponential distribution", "min" = 1e-6, "max" = NA)),
+    "range_plot" = c(0, 5)
   )
 )
 
@@ -39,7 +42,8 @@ pdiffnorm",
     "params" = list("m1" = list("value" = 0, "label" = "Mean of first normal distribution", "min" = NA, "max" = NA),
                     "s1" = list("value" = 1, "label" = "Standard deviation of first normal distribution", "min" = 1e-6, "max" = NA),
                     "m2" = list("value" = 0, "label" = "Mean of second normal distribution", "min" = NA, "max" = NA),
-                    "s2" = list("value" = 1, "label" = "Standard deviation of second normal distribution", "min" = 1e-6, "max" = NA))
+                    "s2" = list("value" = 1, "label" = "Standard deviation of second normal distribution", "min" = 1e-6, "max" = NA)),
+"range_plot" = c(-5, 5)
   ),
   "Beta" = list(
     "dens" = function(x, shape1_1, shape2_1, shape1_2, shape2_2) dbetadiff(x, c(shape1_1, shape2_1), c(shape1_2, shape2_2)),
@@ -57,6 +61,7 @@ pdiffbeta",
     "params" = list("shape1_1" = list("value" = 1, "label" = "&alpha; of first beta distribution", "min" = 1e-6, "max" = NA),
                     "shape2_1" = list("value" = 1, "label" = "&beta; of first beta distribution", "min" = 1e-6, "max" = NA),
                     "shape1_2" = list("value" = 1, "label" = "&alpha; of second beta distribution", "min" = 1e-6, "max" = NA),
-                    "shape2_2" = list("value" = 1, "label" = "&beta; of second beta distribution", "min" = 1e-6, "max" = NA))
+                    "shape2_2" = list("value" = 1, "label" = "&beta; of second beta distribution", "min" = 1e-6, "max" = NA)),
+"range_plot" = c(-.99, .99)
   )
 )

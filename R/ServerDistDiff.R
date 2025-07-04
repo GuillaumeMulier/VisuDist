@@ -12,6 +12,11 @@ DistDiffServer <- function(id) {
       ItemDistDiff <- reactive({ListeDifferences[[ChosenDistDiff()]]})
       ValidityInputsDiff <- eventReactive(input$PlotButDiff, {CheckThresh(input$InputThreshDiff)})
       
+      # Update range of graphical parameters
+      observeEvent(ItemDistDiff(), {
+        updateNumericInput(session, inputId = "MinDensDiff", value = ItemDistDiff()[["range_plot"]][1])
+        updateNumericInput(session, inputId = "MaxDensDiff", value = ItemDistDiff()[["range_plot"]][2])
+      })
       # Display the parameters of the chosen distribution
       output$ParamsDistDiff <- renderUI({
         Parametres <- ItemDistDiff()[["params"]]

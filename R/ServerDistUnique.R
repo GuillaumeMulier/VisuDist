@@ -12,6 +12,12 @@ DistUniqueServer <- function(id) {
       ItemDist <- reactive({ListeDistribution[[ChosenDist()]]})
       ValidityInputs <- eventReactive(input$PlotBut1, {CheckThresh(input$InputThresh1)})
       
+      # Update range of graphical parameters
+      observeEvent(ItemDist(), {
+        updateNumericInput(session, inputId = "MinDens1", value = ItemDist()[["range_plot"]][1])
+        updateNumericInput(session, inputId = "MaxDens1", value = ItemDist()[["range_plot"]][2])
+      })
+      
       # Display the parameters of the chosen distribution
       output$ParamsDist <- renderUI({
         Parametres <- ItemDist()[["params"]]
