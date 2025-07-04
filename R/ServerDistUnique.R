@@ -1,6 +1,6 @@
 # Script pour le server de visualisation d'une distribution #
 # Auteur : G. Mulier                                        #
-# Créé le 07/05/2025, modifié le 03/07/2025                 #
+# Créé le 07/05/2025, modifié le 04/07/2025                 #
 
 DistUniqueServer <- function(id) {
   moduleServer(
@@ -167,10 +167,6 @@ DistUniqueServer <- function(id) {
         return(TxtCDF)
       })
       
-      
-      # observeEvent(Donnees1Dist(), {
-      #   print(Donnees1Dist())
-      # })
     }
   )
 }

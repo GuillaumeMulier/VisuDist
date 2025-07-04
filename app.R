@@ -5,6 +5,7 @@
 library(shiny)
 library(bslib)
 library(ggplot2)
+library(phase1b)
 
 ui <- page_navbar( 
   header = tags$head(
@@ -17,7 +18,7 @@ ui <- page_navbar(
   ),
   nav_panel("Get started", "Page A content"), 
   nav_panel("One distribution", UniqueDist("DistUnique")), 
-  nav_panel("Difference between 2 distributions", "Page C content"), 
+  nav_panel("Difference between 2 distributions", DifferenceDist("DistDiff")), 
   title = "Get probabilities from distribution", 
   id = "page", 
 ) 
@@ -25,6 +26,7 @@ ui <- page_navbar(
 server <- function(input, output) {
 
   DistUniqueServer("DistUnique")
+  DistDiffServer("DistDiff")
   
 }
 

@@ -34,6 +34,7 @@ UniqueDist <- function(id) {
                  verbatimTextOutput(ns("CodeDensiteBaseR"))),
         tabPanel("ggplot2",
                  h4("Plot of the distribution"),
+                 p(tags$i("If multiple thresholds are supplied, the plot is drawn for the first one.")),
                  plotOutput(ns("GrapheDensiteGgplot")),
                  h4("Code to reproduce the plot"),
                  verbatimTextOutput(ns("CodeDensiteGgplot")))
