@@ -124,7 +124,7 @@ DistUniqueServer <- function(id) {
       })
       
       # Result of the probabilities wanted
-      output$TableRes1 <- renderTable({
+      TableauResult <- eventReactive(input$PlotBut1, {
         req(ValidityInputs())
         validate(need(
           ValidityInputs()[[1]],
@@ -143,6 +143,9 @@ DistUniqueServer <- function(id) {
           }, 
           character(1))
         )
+      })
+      output$TableRes1 <- renderTable({
+        TableauResult()
       })
       
       # Code to reproduce the probabilities

@@ -16,7 +16,13 @@ ui <- page_navbar(
     }
   "))
   ),
-  nav_panel("Get started", "Page A content"), 
+  nav_panel("Get started", 
+            fluidPage(
+              p("This application aims at computing probabilities given a known distribution (for example posterior probabilities in bayesian analysis.",
+                "It is separated in 2 parts:"
+                )
+            )
+            ), 
   nav_panel("One distribution", UniqueDist("DistUnique")), 
   nav_panel("Difference between 2 distributions", DifferenceDist("DistDiff")), 
   title = "Get probabilities from distribution", 

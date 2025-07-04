@@ -125,7 +125,7 @@ DistDiffServer <- function(id) {
       })
       
       # Result of the probabilities wanted
-      output$TableResDiff <- renderTable({
+      TableauResultDiff <- eventReactive(input$PlotButDiff, {
         req(ValidityInputsDiff())
         validate(need(
           ValidityInputsDiff()[[1]],
@@ -144,6 +144,9 @@ DistDiffServer <- function(id) {
           }, 
           character(1))
         )
+      })
+      output$TableResDiff <- renderTable({
+        TableauResultDiff()
       })
       
       # Code to reproduce the probabilities
